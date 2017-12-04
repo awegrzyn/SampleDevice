@@ -22,12 +22,12 @@ class ExamplePlugin : public fair::mq::Plugin
 auto ExamplePluginProgramOptions() -> fair::mq::Plugin::ProgOptions;
 
 REGISTER_FAIRMQ_PLUGIN(
-    ExamplePlugin,                              // Class name
-    example,                                    // Plugin name (string, lower case chars only)
-    (fair::mq::Plugin::Version{1,0,0}), 	// Version
-    "Adam Wegrzynek <adam.wegrzynek@cern.ch>",  // Maintainer
-    "", // Homepage
-    example::ExamplePluginProgramOptions        // Free function which declares custom program options for the plugin
+  ExamplePlugin, 					// Class name
+  example, 						// Plugin name (string, lower case chars only)
+  (fair::mq::Plugin::Version{1,0,0}), 			// Version
+  "Adam Wegrzynek <adam.wegrzynek@cern.ch>", 		// Maintainer
+  "https://github.com/awegrzyn/SampleDevice.git", 	// Homepage
+  example::ExamplePluginProgramOptions 			// Free function which declares custom program options for the plugin
 )
 
 } /* namespace example */

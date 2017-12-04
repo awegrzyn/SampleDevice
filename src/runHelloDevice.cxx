@@ -12,7 +12,7 @@ int main(int argc, char* argv[]) {
   // 's:' - means static and it can only be used for plugins linked into the library at build time
   runner.AddHook<LoadPlugins>([](DeviceRunner& r){
     r.fPluginManager->LoadPlugin("s:example");
-    // alternative option would be loading plugins dynamically
+    // By default plugins are loaded dynamically
     // r.fPluginManager->LoadPlugin("example");
   });
 

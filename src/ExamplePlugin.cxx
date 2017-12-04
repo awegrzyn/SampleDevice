@@ -1,4 +1,5 @@
 #include "SampleDevice/ExamplePlugin.h"
+
 namespace example
 {
 
