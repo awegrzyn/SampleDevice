@@ -22,7 +22,7 @@ make -j
 
 4. Run device
 ```
-./bin/HelloDevice
+./bin/HelloDevice --id hello --custom-example-option sample-value --mq-config hello-device.json
 ```
 
 ### Based on:
