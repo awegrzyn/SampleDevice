@@ -13,7 +13,7 @@ HelloDevice::HelloDevice()
 
 void HelloDevice::InitTask()
 {
-   fText = fConfig->GetValue<string>("text");
+   fText = fConfig->GetValue<string>("custom-example-option");
 }
 
 bool HelloDevice::ConditionalRun() {
@@ -27,8 +27,18 @@ bool HelloDevice::ConditionalRun() {
   if (Send(msg, "data") < 0) {
     return false;
   }
-  std::string option = fConfig->GetValue<string>("custom-example-option");
-  LOG(INFO) << "From device: " << "custom-example-option = " << (option.empty() ? "<empty>" : option);
+
+  LOG(INFO) << "From device: " << "custom-example-option = " << (fText.empty() ? "<empty>" : fText);
+
+  for (const auto& mi : fChannels) {
+    for (const auto& vi : mi.second) {
+      LOG(DEBUG) << "BytesTx = " << vi.GetBytesTx();
+      LOG(DEBUG) << "BytesRx = " << vi.GetBytesRx();
+      LOG(DEBUG) << "MessagesTx = " << vi.GetMessagesTx();
+      LOG(DEBUG) << "MessagesRx = " << vi.GetMessagesRx();
+    }
+  }
+
   this_thread::sleep_for(chrono::seconds(1));
   return true;
 }
