@@ -10,7 +10,9 @@ class HelloDevice : public FairMQDevice
     virtual ~HelloDevice();
 
   protected:
+    std::string fText;
     virtual void InitTask();
+    virtual bool ConditionalRun();
 };
 
 #endif /* HELLODEVICE_H_ */

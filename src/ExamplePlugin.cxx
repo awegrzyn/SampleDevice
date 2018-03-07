@@ -16,12 +16,21 @@ ExamplePlugin::ExamplePlugin(
     [&](DeviceState newState) {
       switch (newState) {
         case DeviceState::InitializingDevice:
-          const std::string option = GetPropertyAsString("custom-example-option");
-          LOG(INFO) << "custom-example-option = " << (option.empty() ? "<empty>" : option);
-          break;
+        {
+          std::string anOption = GetPropertyAsString("custom-example-option");
+          LOG(INFO) << "custom-example-option = " << (anOption.empty() ? "<empty>" : anOption);
+        }
+        break;
+        case DeviceState::Exiting:
+          UnsubscribeFromDeviceStateChange();
+        break;
       }
     }
   );
+
+  SubscribeToPropertyChange<int>([](const std::string& key, int value) {
+    LOG(INFO) << "Key: " << key << ", Value: " << value;
+  });
 }
 
 // define additional options required by plugin ("custom-example-option")

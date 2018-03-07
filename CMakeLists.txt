@@ -82,3 +82,4 @@ O2_GENERATE_EXECUTABLE(
         MODULE_LIBRARY_NAME ${LIBRARY_NAME}
         BUCKET_NAME ${BUCKET_NAME}
         )
+configure_file(src/hello-device.json ${CMAKE_BINARY_DIR}/hello-device.json)
