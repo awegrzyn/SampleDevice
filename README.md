@@ -22,7 +22,7 @@ make -j
 
 4. Run device
 ```
-./bin/HelloDevice --id hello --custom-example-option sample-value
+./bin/HelloDevice
 ```
 
 ### Based on:
