@@ -15,6 +15,15 @@ void HelloDevice::InitTask()
   fTree = fConfig->GetValue<boost::property_tree::ptree>("array");
 }
 
+/*
+{
+  "id": "123", 
+  "array": [
+    {"name": "alice"},
+    { "name" : "bob"}
+  ]
+}
+*/
 bool HelloDevice::ConditionalRun() {
   LOG(INFO) << fTree.get<int>("id");
   auto anArray = fTree.get_child("array");
