@@ -11,14 +11,11 @@ int main(int argc, char* argv[]) {
   // load buil-in example plugin
   // 's:' - means static and it can only be used for plugins linked into the library at build time
   runner.AddHook<LoadPlugins>([](DeviceRunner& r){
-    r.fPluginManager->LoadPlugin("s:example");
-    // By default plugins are loaded dynamically
-    // r.fPluginManager->LoadPlugin("example");
+    r.fPluginManager.LoadPlugin("s:example");
   });
 
-  // start device
   runner.AddHook<InstantiateDevice>([](DeviceRunner& r){
-    r.fDevice = std::make_shared<HelloDevice>();
+    r.fDevice = std::make_unique<HelloDevice>();
   });
 
   return runner.RunWithExceptionHandlers();
