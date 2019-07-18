@@ -2,14 +2,14 @@
 
 ## Installation
 
-1. Install `O2`/`FairRoot`
+1. Install `FairMQ`
 ```
-aliBuild build O2 --defaults o2-daq
+aliBuild build FairMQ --defaults o2-dataflow
 ```
 
 2. Load env
 ```
-alienv load O2/latest-o2-daq
+alienv load FairMQ/latest-o2-dataflow
 ```
 
 3. Compile device with built-in plugin
@@ -22,7 +22,7 @@ make -j
 
 4. Run device
 ```
-./bin/HelloDevice --id hello --custom-example-option sample-value --mq-config hello-device.json
+./bin/HelloDevice --id hello --custom-example-option sample-value
 ```
 
 ### Based on:

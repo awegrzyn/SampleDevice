@@ -46,5 +46,3 @@ target_compile_features(SampleDevice PUBLIC cxx_std_17)
 
 add_executable(HelloDevice src/runHelloDevice.cxx)
 target_link_libraries(HelloDevice PRIVATE SampleDevice)
-
-configure_file(src/hello-device.json ${CMAKE_BINARY_DIR}/hello-device.json)
