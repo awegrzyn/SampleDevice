@@ -7,18 +7,20 @@
 using namespace std;
 
 HelloDevice::HelloDevice()
-  : fText()
 {
 }
 
 void HelloDevice::InitTask()
 {
-   fText = fConfig->GetValue<string>("custom-example-option");
+  fTree = fConfig->GetValue<boost::property_tree::ptree>("array");
 }
 
 bool HelloDevice::ConditionalRun() {
-  LOG(INFO) << "From device: " << "custom-example-option = " << (fText.empty() ? "<empty>" : fText);
-
+  LOG(INFO) << fTree.get<int>("id");
+  auto anArray = fTree.get_child("array");
+  for (auto const &it: anArray) {
+    LOG(INFO) << it.second.get<std::string>("name");
+  }
   this_thread::sleep_for(chrono::seconds(1));
   return true;
 }

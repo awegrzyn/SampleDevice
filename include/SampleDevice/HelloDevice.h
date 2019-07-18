@@ -2,6 +2,7 @@
 #define HELLODEVICE_H_
 
 #include <FairMQDevice.h>
+#include <boost/property_tree/ptree.hpp>
 
 class HelloDevice : public FairMQDevice
 {
@@ -10,7 +11,7 @@ class HelloDevice : public FairMQDevice
     virtual ~HelloDevice();
 
   protected:
-    std::string fText;
+    boost::property_tree::ptree fTree;
     virtual void InitTask();
     virtual bool ConditionalRun();
 };

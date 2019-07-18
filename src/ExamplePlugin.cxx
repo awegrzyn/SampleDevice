@@ -1,4 +1,6 @@
 #include "SampleDevice/ExamplePlugin.h"
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
 
 namespace example
 {
@@ -17,8 +19,12 @@ ExamplePlugin::ExamplePlugin(
       switch (newState) {
         case DeviceState::InitializingDevice:
         {
-          std::string anOption = GetPropertyAsString("custom-example-option");
-          LOG(INFO) << "custom-example-option = " << (anOption.empty() ? "<empty>" : anOption);
+          std::string withArray = "{ \"id\" : \"123\", \"array\" : [{ \"name\" : \"alice\" }, { \"name\" : \"bob\" }] }";
+          using boost::property_tree::ptree;
+          ptree pt;
+          std::istringstream is(withArray);
+          read_json(is, pt);
+          SetProperty("array", pt);
         }
         break;
         case DeviceState::Exiting:
@@ -27,19 +33,12 @@ ExamplePlugin::ExamplePlugin(
       }
     }
   );
-
-  SubscribeToPropertyChange<int>([](const std::string& key, int value) {
-    LOG(INFO) << "Key: " << key << ", Value: " << value;
-  });
 }
 
-// define additional options required by plugin ("custom-example-option")
 auto ExamplePluginProgramOptions() -> fair::mq::Plugin::ProgOptions
 {
-    auto plugin_options = boost::program_options::options_description{"Example Plugin"};
-    plugin_options.add_options()
-        ("custom-example-option", boost::program_options::value<std::string>(), "Custom option.");
-    return plugin_options;
+  auto plugin_options = boost::program_options::options_description{"Example Plugin"};
+  return plugin_options;
 }
 
 } /* namespace example */
